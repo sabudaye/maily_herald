@@ -163,7 +163,7 @@ module MailyHerald
 
     # Checks if Maily tables are present.
     def schema_loaded?
-      !([MailyHerald::Dispatch, MailyHerald::List, MailyHerald::Log, MailyHerald::Subscription].collect(&:table_exists?).select{|v| !v}.length > 0)
+      ActiverRecord::Base.connected? && !([MailyHerald::Dispatch, MailyHerald::List, MailyHerald::Log, MailyHerald::Subscription].collect(&:table_exists?).select{|v| !v}.length > 0)
     end
 
     # Fetches or defines a {Context}.
